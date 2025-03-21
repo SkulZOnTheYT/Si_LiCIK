@@ -19,7 +19,7 @@ function Navbar() {
   
             <div className="flex-1 ml-4 lg:ml-12">
               <h1 className="font-extrabold text-2xl md:text-3xl lg:text-4xl">
-                SI <span className="text-yellow-300">LiCIK</span>
+                Si <span className="text-yellow-300">LiCIK</span>
               </h1>
             </div>
   
@@ -33,7 +33,7 @@ function Navbar() {
               <a href="#Fitur" className="text-[20px] hover:underline tracking-wide">
                 Fitur
               </a>
-              <button className="btn btn-warning rounded-full font-bold text-black hover:bg-yellow-400 mr-4">
+              <button className="btn btn-warning rounded-full font-bold text-black hover:bg-yellow-500 mr-4">
                 Sign Up
               </button>
             </div>
@@ -54,7 +54,7 @@ function Navbar() {
               <a href="#Fitur">Fitur</a>
             </li>
             <li className="mt-4">
-              <a className="bg-yellow-300 text-black hover:bg-yellow-400 font-bold justify-center text-[20px]" href="#">
+              <a className="bg-yellow-400 text-black hover:bg-yellow-500 font-bold justify-center text-[20px]" href="#">
                 Sign Up
               </a>
             </li>
