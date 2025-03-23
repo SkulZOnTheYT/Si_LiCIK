@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function Navbar() {
     return (
       <div className="drawer">
@@ -24,18 +26,20 @@ function Navbar() {
             </div>
   
             <div className="hidden lg:flex items-center gap-12 font-bold">
-              <a href="#" className="text-[20px] hover:underline tracking-wide">
+              <Link to="/" className="text-[20px] hover:underline tracking-wide">
                 Home
-              </a>
+              </Link>
               <a href="#AboutUs" className="text-[20px] hover:underline tracking-wide">
                 About Us
               </a>
               <a href="#Fitur" className="text-[20px] hover:underline tracking-wide">
                 Fitur
               </a>
-              <button className="btn btn-warning rounded-full font-bold text-black hover:bg-yellow-500 mr-4">
-                Sign Up
-              </button>
+              <Link to="/login">
+                <button className="btn btn-warning rounded-full font-bold text-black hover:bg-yellow-500 mr-4">
+                  Sign Up
+                </button>
+              </Link>
             </div>
           </div>
           <div className="mt-16"></div>
@@ -45,7 +49,7 @@ function Navbar() {
           <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             <li className="font-bold text-[20px]">
-              <a href="#">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li className="font-bold text-[20px]">
               <a href="#AboutUs">About Us</a>
@@ -54,9 +58,9 @@ function Navbar() {
               <a href="#Fitur">Fitur</a>
             </li>
             <li className="mt-4">
-              <a className="bg-yellow-400 text-black hover:bg-yellow-500 font-bold justify-center text-[20px]" href="#">
+              <Link to="/login" className="bg-yellow-400 text-black hover:bg-yellow-500 font-bold justify-center text-[20px]" href="#">
                 Sign Up
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
