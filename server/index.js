@@ -14,10 +14,14 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 5000
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://silicik.vercel.app",
-]
+const allowedOrigins = [ "http://localhost:5173", "https://silicik.vercel.app" ]
+
+app.use((req, res, next) => {
+  if(req.headers["x-forwarded-proto"] === "http") {
+    return res.redirect(301, `https://${req.headers.host}${req.url}`)
+  }
+  next()
+})
 
 //midleware
 app.use(cookieParser())
@@ -80,7 +84,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
-      scope: ["profile", "email"],
+      Proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
