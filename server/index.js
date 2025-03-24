@@ -59,9 +59,9 @@ app.use(
       autoRemove: "native",
     }),
     cookie: {
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       maxAge: 14 * 24 * 60 * 60 * 1000, // 14 hari
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+      sameSite: "none",
     },
   }),
 )
