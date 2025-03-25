@@ -2,22 +2,27 @@ import express from "express"
 import passport from "passport"
 const router = express.Router()
 
-// Rute untuk memulai autentikasi Google
-router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }))
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173"
 
-// Callback URL setelah autentikasi Google
+// Google authentication route
+router.get("/google", passport.authenticate("google", { 
+  scope: ["profile", "email"],
+  prompt: "select_account"
+}))
+
+// Google callback route
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    failureRedirect: `${process.env.CLIENT_URL || "http://localhost:3000"}/login`,
+    failureRedirect: `${CLIENT_URL}/login`,
     session: true,
   }),
   (req, res) => {
-    res.redirect(process.env.CLIENT_URL || "https://silicik.vercel.app/dashboard") // Redirect ke halaman utama setelah login berhasil
-  },
+    res.redirect(`${CLIENT_URL}/dashboard`)
+  }
 )
 
-// Endpoint untuk memeriksa status autentikasi
+// Check authentication status
 router.get("/status", (req, res) => {
   if (req.isAuthenticated()) {
     return res.json({
@@ -30,13 +35,19 @@ router.get("/status", (req, res) => {
   })
 })
 
-// Endpoint untuk logout
+// Logout route
 router.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
       return next(err)
     }
-    res.redirect(process.env.CLIENT_URL || "http://localhost:3000")
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err)
+      }
+      res.clearCookie("connect.sid")
+      res.redirect(CLIENT_URL)
+    })
   })
 })
 

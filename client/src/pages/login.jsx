@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react"
 
 function Login() {
     const handleGoogleLogin = () => {
-      window.location.href = "https://silicik-api.up.railway.app/auth/google"
+      window.location.href = "http://localhost:5000/auth/google"
     }
   
     return (
