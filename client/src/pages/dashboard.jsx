@@ -8,7 +8,7 @@ function Dashboard({ user }) {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const response = await axios.get('/api/user')
+        const response = await axios.get('https://silicik-api.up.railway.app/api/user')
         if (!response.data.success) {
           navigate('/login', { replace: true })
         }
