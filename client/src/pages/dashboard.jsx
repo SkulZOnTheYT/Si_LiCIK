@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import url from '../url'
 
 function Dashboard({ user }) {
   const navigate = useNavigate()
@@ -8,7 +9,7 @@ function Dashboard({ user }) {
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const response = await axios.get('https://silicik-api.up.railway.app/api/user')
+        const response = await axios.get(`${url.apiUrl}/api/user`)
         if (!response.data.success) {
           navigate('/login', { replace: true })
         }
