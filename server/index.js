@@ -11,6 +11,7 @@ import authRoutes from './routes/auth.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
@@ -31,7 +32,7 @@ app.use("/api/data", ToLiterasi);
 
 // konfigurasi CORS
 app.use(cors({
-  origin: 'https://silicik.vercel.app',
+  origin: CLIENT_URL,
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],

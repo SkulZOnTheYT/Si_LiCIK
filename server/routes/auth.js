@@ -1,7 +1,9 @@
 import express from "express";
 import { OAuth2Client } from 'google-auth-library';
 import User from '../model/User.js';
+import dotenv from "dotenv";
 
+dotenv.config();
 const router = express.Router();
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
