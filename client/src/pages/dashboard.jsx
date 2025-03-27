@@ -14,7 +14,7 @@ function Dashboard({ user }) {
     console.log("API URL digunakan:", url.apiUrl);
     const verifyAuth = async () => {
       try {
-        const response = await axios.get(`${url.apiUrl}/api/user`, {
+        const response = await axios.get(`https://silicik-api.up.railway.app/api/user`, {
           withCredentials: true,
         });
         console.log("Response from /api/user:", response.data);
