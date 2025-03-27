@@ -1,33 +1,39 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import url from '../url'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import url from '../url';
 
 function Dashboard({ user }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    window.location.href = `${url.apiUrl}/auth/logout`;
+  };
 
   useEffect(() => {
     const verifyAuth = async () => {
       try {
-        const response = await axios.get(`${url.apiUrl}/api/user`)
+        const response = await axios.get(`${url.apiUrl}/api/user`, {
+          withCredentials: true,
+        });
         if (!response.data.success) {
-          navigate('/login', { replace: true })
+          navigate('/login', { replace: true });
         }
       } catch (error) {
-        console.error('Authentication verification failed:', error)
-        navigate('/login', { replace: true })
+        console.error('Authentication verification failed:', error.response?.data || error.message);
+        navigate('/login', { replace: true });
       }
-    }
+    };
 
-    verifyAuth()
-  }, [navigate])
+    verifyAuth();
+  }, [navigate]);
 
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
       </div>
-    )
+    );
   }
 
   return (
@@ -47,7 +53,6 @@ function Dashboard({ user }) {
             </p>
           </div>
         </div>
-
         <div className="border-t pt-6">
           <h2 className="text-xl font-semibold mb-4">Welcome to Your Dashboard</h2>
           <p className="text-gray-700">
@@ -55,8 +60,9 @@ function Dashboard({ user }) {
           </p>
         </div>
       </div>
+      <button onClick={handleLogout}>LogOut</button>
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
