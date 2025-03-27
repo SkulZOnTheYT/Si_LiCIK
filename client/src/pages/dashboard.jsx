@@ -11,12 +11,15 @@ function Dashboard({ user }) {
   };
 
   useEffect(() => {
+    console.log("API URL digunakan:", url.apiUrl);
     const verifyAuth = async () => {
       try {
         const response = await axios.get(`${url.apiUrl}/api/user`, {
           withCredentials: true,
         });
+        console.log("Response from /api/user:", response.data);
         if (!response.data.success) {
+          console.log("Not authenticated, redirecting to /login");
           navigate('/login', { replace: true });
         }
       } catch (error) {
@@ -24,7 +27,6 @@ function Dashboard({ user }) {
         navigate('/login', { replace: true });
       }
     };
-
     verifyAuth();
   }, [navigate]);
 

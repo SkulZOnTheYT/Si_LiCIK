@@ -61,7 +61,9 @@ app.use(session({
   cookie: {
     secure: process.env.NODE_ENV === "production", // Secure hanya di production (HTTPS)
     maxAge: 14 * 24 * 60 * 60 * 1000, // 14 hari
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // None untuk cross-site di production
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    httpOnly: true,
+    domain: process.env.NODE_ENV === "production" ? ".up.railway.app" : undefined,
   },
 }));
 
@@ -110,6 +112,10 @@ app.use(passport.session());
 app.use("/auth", authRoutes);
 
 app.get("/api/user", (req, res) => {
+  console.log("Session ID:", req.sessionID);
+  console.log("Session:", req.session);
+  console.log("Authenticated:", req.isAuthenticated());
+  console.log("User:", req.user);
   if (req.isAuthenticated()) {
     return res.json({
       success: true,
