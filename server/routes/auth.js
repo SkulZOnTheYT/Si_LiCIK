@@ -4,10 +4,12 @@ import User from '../model/User.js';
 
 const router = express.Router();
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
+const CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || '';
 
 const googleClient = new OAuth2Client({
-  clientId: "157562183154-g1e336oi1rr6di75t0vlm04b10l4cpum.apps.googleusercontent.com",
-  clientSecret: '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',
+  clientId: CLIENT_ID,
+  clientSecret: CLIENT_SECRET,
   redirectUri: `${process.env.SERVER_URL || "http://localhost:5000"}/auth/google/callback`
 });
 
@@ -19,14 +21,13 @@ router.get("/google", (req, res) => {
   res.redirect(url);
 });
 
-// Google callback route
 router.get("/google/callback", async (req, res) => {
   try {
     const { code } = req.query;
     const { tokens } = await googleClient.getToken(code);
     const ticket = await googleClient.verifyIdToken({
       idToken: tokens.id_token,
-      audience: "157562183154-g1e336oi1rr6di75t0vlm04b10l4cpum.apps.googleusercontent.com"
+      audience: CLIENT_ID,
     });
 
     const payload = ticket.getPayload();
@@ -50,7 +51,6 @@ router.get("/google/callback", async (req, res) => {
   }
 });
 
-// Check authentication status
 router.get("/status", (req, res) => {
   if (req.session.user) {
     return res.json({
@@ -63,7 +63,6 @@ router.get("/status", (req, res) => {
   });
 });
 
-// Logout route
 router.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {

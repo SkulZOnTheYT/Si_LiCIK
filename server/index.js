@@ -6,12 +6,11 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import authRoutes from './routes/auth.js';
-import ToLiterasi from './ToLiterasi.js'
+//import ToLiterasi from './ToLiterasi.js' -unused
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
@@ -29,6 +28,7 @@ app.use(express.json());
 /**
 app.use("/api/data", ToLiterasi);
 */
+
 // konfigurasi CORS
 app.use(cors({
   origin: 'https://silicik.vercel.app',
@@ -100,7 +100,7 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB");
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });
   })
