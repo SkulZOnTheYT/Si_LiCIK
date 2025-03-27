@@ -15,7 +15,6 @@ const app = express();
 
 // Port dinamis untuk Railway atau fallback ke 5000
 const PORT = process.env.PORT || 5000;
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
 const SERVER_URL = process.env.SERVER_URL || `http://localhost:${PORT}`;
 
 // Force HTTPS di production
@@ -34,7 +33,7 @@ app.use(express.json());
 
 // CORS configuration
 app.use(cors({
-  origin: CLIENT_URL,
+  origin: true,
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
