@@ -6,6 +6,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import authRoutes from './routes/auth.js';
+import ToLiterasi from './ToLiterasi.js'
 
 dotenv.config();
 const app = express();
@@ -25,6 +26,9 @@ if (process.env.NODE_ENV === "production") {
 app.use(cookieParser());
 app.use(express.json());
 
+/**
+app.use("/api/data", ToLiterasi);
+*/
 // konfigurasi CORS
 app.use(cors({
   origin: 'https://silicik.vercel.app',
