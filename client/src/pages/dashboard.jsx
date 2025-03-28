@@ -11,10 +11,10 @@ function Dashboard({ user }) {
   };
 
   useEffect(() => {
-    console.log("API URL digunakan:", url.apiUrl);
+    console.log("Dashboard mounted, API URL:", url.apiUrl);
     const verifyAuth = async () => {
       try {
-        const response = await axios.get(`https://silicik-api.up.railway.app/api/user`, {
+        const response = await axios.get(`/api/user?ts=${Date.now()}`, {
           withCredentials: true,
         });
         console.log("Response from /api/user:", response.data);

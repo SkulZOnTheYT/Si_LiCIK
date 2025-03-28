@@ -6,12 +6,10 @@ import dotenv from "dotenv";
 dotenv.config();
 const router = express.Router();
 const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5173";
-const CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
-const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || '';
 
 const googleClient = new OAuth2Client({
-  clientId: CLIENT_ID,
-  clientSecret: CLIENT_SECRET,
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   redirectUri: `${process.env.SERVER_URL || "http://localhost:5000"}/auth/google/callback`
 });
 
@@ -25,17 +23,23 @@ router.get("/google", (req, res) => {
 
 router.get("/google/callback", async (req, res) => {
   try {
+    console.log("Callback Query:", req.query);
     const { code } = req.query;
+
+    if (!code) throw new Error("No code provided");
+
     const { tokens } = await googleClient.getToken(code);
+    console.log("Tokens:", tokens);
+
     const ticket = await googleClient.verifyIdToken({
       idToken: tokens.id_token,
-      audience: CLIENT_ID,
+      audience: process.env.GOOGLE_CLIENT_ID
     });
 
     const payload = ticket.getPayload();
-    
+    console.log("Payload:", payload);
+
     let user = await User.findOne({ googleId: payload.sub });
-    
     if (!user) {
       user = await User.create({
         googleId: payload.sub,
@@ -44,11 +48,18 @@ router.get("/google/callback", async (req, res) => {
         avatar: payload.picture,
       });
     }
-    
+
     req.session.user = user;
-    res.redirect(`${CLIENT_URL}/dashboard`);
+    console.log("Session set:", req.session.user);
+
+    req.session.save((err) => {
+      if (err) console.error("Session save error:", err);
+      console.log("Redirecting to:", `${CLIENT_URL}/dashboard`);
+      res.redirect(`${CLIENT_URL}/dashboard`);
+    });
+
   } catch (error) {
-    console.error('Authentication error:', error);
+    console.error("Callback Error:", error.message);
     res.redirect(`${CLIENT_URL}/login`);
   }
 });
