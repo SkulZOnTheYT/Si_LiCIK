@@ -1,20 +1,21 @@
-import './App.css'
-import Dashboard from './pages/dashboard'
-import LandingPage from './pages/landingPage'
-import Login from './pages/login'
-import Footer from './component/footer'
-import Navbar from './component/navbar'
-import axios from 'axios'
-import url from './url'
-import { useState, useEffect } from 'react'
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import "./App.css";
+import Login from "./pages/login";
+import LandingPage from "./pages/landingPage";
+import NotFound from "./pages/notFound";
+import Profile from "./pages/profile";
+import Footer from "./component/footer";
+import Navbar from "./component/navbar";
+import axios from "axios";
+import url from "./utils/url";
+import { useState, useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // Set default axios configuration
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = url.apiUrl;
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const Location = useLocation();
@@ -40,7 +41,7 @@ function App() {
 
   useEffect(() => {
     checkAuthStatus();
-  }, [Location.pathname]); // Re-run on route change
+  }, [Location.pathname]);
 
   const PrivateRoute = ({ children }) => {
     if (loading) {
@@ -53,28 +54,27 @@ function App() {
   };
 
   return (
-      <div className="flex flex-col min-h-screen">
-        <Navbar user={user} />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route 
-              path="/dashboard" 
-              element={
-                <PrivateRoute>
-                  <Dashboard user={user} />
-                </PrivateRoute>
-              } 
-            />
-            <Route 
-              path="/login" 
-              element={user ? <Navigate to="/dashboard" replace /> : <Login />} 
-            />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-  )
+    <div className="flex flex-col min-h-screen">
+      <Navbar user={user} />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/login"
+          element={user ? <Navigate to="/dashboard" replace /> : <Login />}
+        />
+        <Route 
+          path="/profil" 
+          element={
+            <PrivateRoute>
+              <Profile user={user} />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;

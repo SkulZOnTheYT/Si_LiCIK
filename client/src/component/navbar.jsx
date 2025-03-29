@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import url from "../url"
+import url from "../utils/url"
 
 function Navbar({user}) {
   const isAuthenticated = !!user;
@@ -39,21 +39,30 @@ function Navbar({user}) {
             </div>
   
             <div className="flex-1 ml-4 lg:ml-12">
-              <h1 className="font-extrabold text-2xl md:text-3xl lg:text-4xl">
+              <button onClick={() => handleScroll('hero')} className="font-extrabold text-2xl md:text-3xl lg:text-4xl">
                 Si <span className="text-yellow-300">LiCIK</span>
-              </h1>
+              </button>
             </div>
   
             <div className="hidden lg:flex items-center gap-12 font-bold">
-              <Link to="/" className="text-[20px] hover:underline tracking-wide">
-                Home
-              </Link>
-              <button onClick={() => handleScroll('fitur')} className="text-[20px] hover:underline tracking-wide">
+              <button
+                onClick={() => handleScroll("fitur")}
+                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md"
+              >
                 Fitur
               </button>
-              <button onClick={() => handleScroll('cara-kerja')} className="text-[20px] hover:underline tracking-wide">
+              <button
+                onClick={() => handleScroll("cara-kerja")}
+                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md"
+              >
                 Cara Kerja
               </button>
+              <Link
+                to="/dashboard"
+                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md"
+              >
+                Dashboard
+              </Link>
             </div>
               {isAuthenticated ? (
               <div className="dropdown dropdown-end ml-8">
@@ -75,13 +84,13 @@ function Navbar({user}) {
                       <span className="badge">New</span>
                     </Link>
                   </li>
-                  <li><a>Profile</a></li>
+                  <li><Link to={'/profil'}>Profile</Link></li>
                   <li><a href={`${url.apiUrl}/auth/logout`}>Logout</a></li>
                 </ul>
               </div>
             ) : (
               <Link to="/login">
-                <button className="btn btn-warning rounded-full font-bold text-black hover:bg-yellow-500 mr-4">
+                <button className="btn btn-warning rounded-full font-bold text-black hover:bg-yellow-500 mr-2 ml-14">
                   Sign Up
                 </button>
               </Link>
@@ -92,23 +101,30 @@ function Navbar({user}) {
   
         <div className="drawer-side z-50">
           <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-            <li className="font-bold text-[20px] mt-5">
-              <button onClick={() => handleLinkClick('/')}>Home</button>
+          <ul className="menu p-6 w-80 min-h-full bg-base-100 shadow-xl text-base-content transition-all duration-300 ease-in-out">
+            <li className="mb-4">
+              <button
+                onClick={() => handleScroll("fitur")}
+                className="text-[20px] font-bold text-gray-700 btn btn-ghost w-full justify-start hover:bg-yellow-100 hover:text-yellow-500 transition-all duration-300 ease-in-out rounded-lg group"
+              >
+                Fitur Si<span className="text-yellow-400 group-hover:text-yellow-500">LiCIK</span>
+              </button>
             </li>
-            <li className="font-bold text-[20px] mt-2">
-              <button onClick={() => handleScroll('fitur')}>Fitur Si<span className="text-yellow-300">LiCIK</span></button>
-            </li>
-            <li className="font-bold text-[20px] mt-2">
-              <button onClick={() => handleScroll('cara-kerja')}>Cara Kerja Si<span className="text-yellow-300">LiCIK</span></button>
+            <li className="mb-4">
+              <button
+                onClick={() => handleScroll("cara-kerja")}
+                className="text-[20px] font-bold text-gray-700 btn btn-ghost w-full justify-start hover:bg-yellow-100 hover:text-yellow-500 transition-all duration-300 ease-in-out rounded-lg group"
+              >
+                Cara Kerja Si<span className="text-yellow-400 group-hover:text-yellow-500">LiCIK</span>
+              </button>
             </li>
             <li className="mt-10">
-            <Link
-              to={isAuthenticated ? "/dashboard" : "/login"}
-              className="bg-yellow-400 text-black hover:bg-yellow-500 font-bold justify-center text-[20px]"
-            >
-              {isAuthenticated ? "Lanjut ke Dashboard" : "Sign Up"}
-            </Link>
+              <button
+                onClick={() => handleLinkClick("/dashboard")}
+                className="btn btn-primary bg-yellow-400 text-black hover:bg-yellow-500 hover:shadow-lg w-full font-bold text-[20px] transition-all duration-300 ease-in-out rounded-lg"
+              >
+                Lanjut ke Dashboard
+              </button>
             </li>
           </ul>
         </div>

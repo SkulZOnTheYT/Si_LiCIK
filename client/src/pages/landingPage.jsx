@@ -1,10 +1,22 @@
 import { BarChart3, BookOpen, ChevronRight, CreditCard, LineChart, PieChart, Smartphone } from "lucide-react"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function LandingPage() {
+  let navigate = useNavigate();
+
+  const handleScroll = (sectionId) => {
+    navigate("/");
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100); // delay
+  };
+
   return (
     <main className="flex min-h-screen flex-col flex-1">
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white via-yellow-50 to-white">
+      <section id="hero" className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white via-yellow-50 to-white">
         <div className="container px-4 md:px-6 mx-auto">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
             <div className="flex flex-col justify-center space-y-4">
@@ -19,7 +31,7 @@ function LandingPage() {
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <button className="inline-flex h-10 items-center justify-center rounded-md bg-yellow-500 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-yellow-500">
-                  <Link to="#daftar">Mulai Sekarang</Link>
+                  <button onClick={() => handleScroll('daftar')}>Mulai Sekarang</button>
                   <ChevronRight className="ml-2 h-4 w-4" />
                 </button>
               </div>
@@ -163,13 +175,13 @@ function LandingPage() {
               </p>
             </div>
             <div className="w-full max-w-md space-y-2 mt-6">
-              <Link to="/login">
+              <Link to="/dashboard">
                 <button className="inline-flex h-10 items-center justify-center rounded-md bg-yellow-500 px-8 text-sm font-medium text-white shadow transition-colors hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2">
-                  Daftar Sekarang
+                  lanjut ke dashboard
                 </button>
                 </Link>
               <p className="text-xs text-gray-600 mt-4">
-                Dengan mendaftar, Anda menyetujui{" "}
+                Dengan menggunakan Si LiCIK, Anda menyetujui{" "}
                 <Link to="/privacy" className="text-yellow-700 underline underline-offset-2 hover:text-yellow-800">
                   Kebijakan Privasi
                 </Link>{" "}

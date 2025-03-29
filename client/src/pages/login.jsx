@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react"
-import url from "../url"
+import url from "../utils/url"
 
 function Login() {
     const handleGoogleLogin = () => {
