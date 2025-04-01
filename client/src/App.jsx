@@ -9,6 +9,7 @@ import axios from "axios";
 import url from "./utils/url";
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import Dashboard from "./pages/dashboard";
 
 // Set default axios configuration
 axios.defaults.withCredentials = true;
@@ -60,7 +61,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route
           path="/login"
-          element={user ? <Navigate to="/dashboard" replace /> : <Login />}
+          element={user ? <Navigate to="/profile" replace /> : <Login />}
         />
         <Route 
           path="/profil" 
@@ -70,6 +71,7 @@ function App() {
             </PrivateRoute>
           } 
         />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

@@ -10,11 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-jvectormap/core": "^1.0.4",
     "@tailwindcss/vite": "^4.0.14",
     "axios": "^1.8.4",
     "daisyui": "^5.0.4",
     "lucide-react": "^0.482.0",
     "react": "^19.0.0",
+    "react-apexcharts": "^1.7.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.3.0",
     "remixicon": "^4.6.0",
