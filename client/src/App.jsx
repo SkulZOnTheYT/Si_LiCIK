@@ -1,15 +1,18 @@
 import "./App.css";
+import Dashboard from "./pages/dashboard/index";
+import Privacy from "./pages/privacy";
 import Login from "./pages/login";
 import LandingPage from "./pages/landingPage";
 import NotFound from "./pages/notFound";
 import Profile from "./pages/profile";
 import Footer from "./component/footer";
 import Navbar from "./component/navbar";
+import NavbarDashboard from "./component/navbardash";
 import axios from "axios";
 import url from "./utils/url";
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import Dashboard from "./pages/dashboard";
+
 
 // Set default axios configuration
 axios.defaults.withCredentials = true;
@@ -54,9 +57,16 @@ function App() {
     return user ? children : <Navigate to="/login" replace />;
   };
 
+  const getNavbar = () => {
+    if (location.pathname.startsWith('/dashboard')) {
+      return <NavbarDashboard user={user} />;
+    }
+    return <Navbar user={user} />;
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar user={user} />
+      {getNavbar()}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route
@@ -72,6 +82,7 @@ function App() {
           } 
         />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path='/privacy' element={<Privacy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
