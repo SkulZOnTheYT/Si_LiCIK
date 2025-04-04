@@ -18,6 +18,7 @@ router.get("/google", (req, res) => {
     scope: ['profile', 'email'],
     prompt: 'select_account'
   });
+  console.log("Generated Auth URL:", url);
   res.redirect(url);
 });
 
@@ -25,7 +26,6 @@ router.get("/google/callback", async (req, res) => {
   try {
     console.log("Callback Query:", req.query);
     const { code } = req.query;
-
     if (!code) throw new Error("No code provided");
 
     const { tokens } = await googleClient.getToken(code);
@@ -53,11 +53,14 @@ router.get("/google/callback", async (req, res) => {
     console.log("Session set:", req.session.user);
 
     req.session.save((err) => {
-      if (err) console.error("Session save error:", err);
-      console.log("Redirecting to:", `${CLIENT_URL}/dashboard`);
-      res.redirect(`${CLIENT_URL}/dashboard`);
+      if (err) {
+        console.error("Session save error:", err);
+        return res.redirect(`${CLIENT_URL}/login`);
+      }
+      console.log("Session ID:", req.sessionID);
+      console.log("Redirecting to:", `${CLIENT_URL}/profil`);
+      res.redirect(`${CLIENT_URL}/profil`);
     });
-
   } catch (error) {
     console.error("Callback Error:", error.message);
     res.redirect(`${CLIENT_URL}/login`);
@@ -65,6 +68,7 @@ router.get("/google/callback", async (req, res) => {
 });
 
 router.get("/status", (req, res) => {
+  console.log("GET /auth/status - Session:", req.session);
   if (req.session.user) {
     return res.json({
       isAuthenticated: true,
