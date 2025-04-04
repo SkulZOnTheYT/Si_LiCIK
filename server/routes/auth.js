@@ -48,8 +48,7 @@ router.get("/google/callback", async (req, res) => {
         avatar: payload.picture,
       });
     }
-
-    req.session.user = user;
+    req.session.user = user.toObject();
     console.log("Session set:", req.session.user);
 
     req.session.save((err) => {
@@ -57,7 +56,8 @@ router.get("/google/callback", async (req, res) => {
         console.error("Session save error:", err);
         return res.redirect(`${CLIENT_URL}/login`);
       }
-      console.log("Session ID:", req.sessionID);
+      console.log("Session ID after save:", req.sessionID);
+      console.log("Full session object after save:", req.session);
       console.log("Redirecting to:", `${CLIENT_URL}/profil`);
       res.redirect(`${CLIENT_URL}/profil`);
     });
@@ -68,7 +68,8 @@ router.get("/google/callback", async (req, res) => {
 });
 
 router.get("/status", (req, res) => {
-  console.log("GET /auth/status - Session:", req.session);
+  console.log("GET /auth/status - Session ID:", req.sessionID);
+  console.log("GET /auth/status - Full Session:", req.session);
   if (req.session.user) {
     return res.json({
       isAuthenticated: true,

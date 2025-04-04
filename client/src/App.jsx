@@ -26,6 +26,7 @@ function App() {
 
   const checkAuthStatus = async () => {
     try {
+      console.log("Cookies sent to server:", document.cookie);
       const response = await axios.get(`/auth/status?ts=${Date.now()}`, {
         withCredentials: true,
       });
