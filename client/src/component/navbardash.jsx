@@ -36,19 +36,19 @@ export default function NavbarDashboard({user}) {
             <div className="hidden lg:flex items-center gap-12 font-bold">
               <NavLink
                 to='/dashboard/analisis'
-                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105 "
+                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105"
               >
                 Analisis
               </NavLink>
               <NavLink
                 to='/dashboard/literasi'
-                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md"
+                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105"
               >
                 Literasi
               </NavLink>
               <Link
                 to="/"
-                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md"
+                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105"
               >
                 Home
               </Link>
@@ -101,7 +101,7 @@ export default function NavbarDashboard({user}) {
             </li>
             <li className="mb-4">
               <button
-                onClick={() => handleLinkClick('/dashboard/literasi')}
+                onClick={() => handleLinkClick('/dashboard/analisis')}
                 className="text-[20px] font-bold text-gray-700 btn btn-ghost w-full justify-start hover:bg-yellow-100 hover:text-yellow-500 transition-all duration-300 ease-in-out rounded-lg group"
               >
                 Analisis <span className="text-yellow-400 group-hover:text-yellow-500">Bisnis</span>

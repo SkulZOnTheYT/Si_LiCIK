@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react"
 import url from "../utils/url"
+import PageMeta from "../component/common/PageMeta"
 
 function Login() {
     const handleGoogleLogin = () => {
@@ -8,6 +9,7 @@ function Login() {
   
     return (
       <div className="flex min-h-screen items-center justify-center bg-white p-4">
+        <PageMeta title="Login | SiLiCIK" description="Login page" />
         <div className="w-full max-w-md overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg">
             <div className="p-8">
                 <h2 className="mb-2 text-center text-2xl font-bold text-black">Login ke Aplikasi</h2>

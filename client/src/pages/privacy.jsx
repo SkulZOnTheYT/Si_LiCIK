@@ -1,6 +1,9 @@
+import PageMeta from "../component/common/PageMeta";
+
 export default function Privacy() {
     return (
       <main className="min-h-screen bg-base-100 py-12 px-4 sm:px-6 lg:px-8">
+        <PageMeta title="Privacy Policy | SiLiCIK" description="Privacy Policy page" />
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">

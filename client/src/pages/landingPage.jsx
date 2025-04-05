@@ -16,7 +16,7 @@ function LandingPage() {
 
   return (
     <main className="flex min-h-screen flex-col flex-1">
-      <section id="hero" className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-white via-yellow-50 to-white">
+      <section id="hero" className="w-full py-12 md:py-24 lg:py-32 bg-white from-white via-yellow-50 to-white">
         <div className="container px-4 md:px-6 mx-auto">
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
             <div className="flex flex-col justify-center space-y-4">
@@ -37,7 +37,7 @@ function LandingPage() {
               </div>
             </div>
             <div className="flex items-center justify-center">
-              <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] xl:h-[420px] overflow-hidden rounded-2xl shadow-xl bg-white">
+              <div className="relative w-full h-[300px] md:h-[400px] lg:h-[500px] xl:h-[420px] overflow-hidden rounded-2xl bg-white">
                 <img
                   src="https://i.pinimg.com/originals/89/67/92/8967925b9d9141e88ced0a9020bdbc5e.gif"
                   alt="SI LICIK Platform"
@@ -46,14 +46,14 @@ function LandingPage() {
                   className="object-cover"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/10 via-transparent to-transparent pointer-events-none"></div>
+                <div className="absolute inset-0 bg-transparent pointer-events-none"></div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="fitur" className="w-full py-12 md:py-24 bg-gray-50">
+      <section id="fitur" className="w-full py-12 md:py-24 bg-gray-100">
         <div className="container px-4 md:px-6 mx-auto">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">

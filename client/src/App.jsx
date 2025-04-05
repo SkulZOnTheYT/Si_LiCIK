@@ -12,6 +12,7 @@ import axios from "axios";
 import url from "./utils/url";
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import Analisis from "./pages/dashboard/analisis";
 
 
 // Set default axios configuration
@@ -46,6 +47,7 @@ function App() {
 
   useEffect(() => {
     checkAuthStatus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [Location.pathname]);
 
   const PrivateRoute = ({ children }) => {
@@ -66,7 +68,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <main className="flex flex-col min-h-screen">
       {getNavbar()}
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -82,12 +84,17 @@ function App() {
             </PrivateRoute>
           } 
         />
+
+          {/* Dashboard Routes */}
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/analisis" element={<Analisis />} />
+
+          {/* Routes Lainnya */}
         <Route path='/privacy' element={<Privacy />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-    </div>
+    </main>
   );
 }
 

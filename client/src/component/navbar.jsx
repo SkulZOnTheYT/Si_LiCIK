@@ -47,19 +47,19 @@ function Navbar({user}) {
             <div className="hidden lg:flex items-center gap-12 font-bold">
               <button
                 onClick={() => handleScroll("fitur")}
-                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md"
+                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105"
               >
                 Fitur
               </button>
               <button
                 onClick={() => handleScroll("cara-kerja")}
-                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md"
+                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105"
               >
                 Cara Kerja
               </button>
               <Link
                 to="/dashboard"
-                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-300 rounded-md"
+                className="text-[20px] text-gray-700 tracking-wide transition-all duration-300 ease-in-out hover:text-yellow-500 hover:underline hover:underline-offset-8 hover:scale-105"
               >
                 Dashboard
               </Link>
