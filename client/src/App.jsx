@@ -1,10 +1,12 @@
-import "./App.css";
-import Dashboard from "./pages/dashboard/index";
 import Privacy from "./pages/privacy";
 import Login from "./pages/login";
 import LandingPage from "./pages/landingPage";
 import NotFound from "./pages/notFound";
 import Profile from "./pages/profile";
+import Analisis from "./pages/dashboard/analisis";
+import Dashboard from "./pages/dashboard/index";
+import Literasi from "./pages/dashboard/literasi";
+import BlogPost from "./pages/dashboard/blogpost";
 import Footer from "./component/footer";
 import Navbar from "./component/navbar";
 import NavbarDashboard from "./component/navbardash";
@@ -12,7 +14,6 @@ import axios from "axios";
 import url from "./utils/url";
 import { useState, useEffect } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import Analisis from "./pages/dashboard/analisis";
 
 
 // Set default axios configuration
@@ -88,6 +89,8 @@ function App() {
           {/* Dashboard Routes */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/analisis" element={<Analisis />} />
+        <Route path="/dashboard/literasi" element={<Literasi />} />
+        <Route path="/dashboard/literasi/:slug" element={<BlogPost />} />
 
           {/* Routes Lainnya */}
         <Route path='/privacy' element={<Privacy />} />
