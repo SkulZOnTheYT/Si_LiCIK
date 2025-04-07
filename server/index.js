@@ -6,6 +6,9 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import authRoutes from './routes/auth.js';
+import literasiRoute from './routes/ToLiterasi.js';
+
+
 //import ToLiterasi from './ToLiterasi.js' -unused
 
 dotenv.config();
@@ -25,12 +28,10 @@ if (process.env.NODE_ENV === "production") {
 app.set('trust proxy', 1);
 
 // Middleware
+
 app.use(cookieParser());
 app.use(express.json());
-
-/**
-app.use("/api/data", ToLiterasi);
-*/
+app.use('/literasi', literasiRoute);
 
 // konfigurasi CORS
 app.use(cors({
@@ -99,6 +100,11 @@ app.use((err, req, res, next) => {
     message: err.message || "Internal Server Error",
   });
 });
+
+app.get('/', (req, res) => {
+  res.send('Halo ini backend Si LiCiK!');
+});
+
 
 // Connect to MongoDB and start server
 mongoose
