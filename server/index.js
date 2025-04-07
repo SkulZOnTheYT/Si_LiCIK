@@ -6,7 +6,7 @@ import session from "express-session";
 import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import authRoutes from './routes/auth.js';
-import literasiRoute from './routes/ToLiterasi.js';
+import analisisRoute from './routes/analisisRoute.js';
 
 
 //import ToLiterasi from './ToLiterasi.js' -unused
@@ -31,7 +31,9 @@ app.set('trust proxy', 1);
 
 app.use(cookieParser());
 app.use(express.json());
-app.use('/literasi', literasiRoute);
+
+app.use('/api/analisis', analisisRoute);
+
 
 // konfigurasi CORS
 app.use(cors({
