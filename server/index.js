@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import MongoStore from "connect-mongo";
 import authRoutes from './routes/auth.js';
 import analisisRoute from './routes/analisisRoute.js';
+import rateLimit from 'express-rate-limit';
 
 
 //import ToLiterasi from './ToLiterasi.js' -unused
@@ -93,7 +94,16 @@ app.get("/health", (req, res) => {
     environment: process.env.NODE_ENV,
   });
 });
-
+//rate-limit
+const rateLimit = require('express-rate-limit');
+const limiter = rateLimit({
+  windowMs: 0.1 * 60 * 1000, // 1 minutes
+  max: 100,
+  success: false,
+  message: 'Too many requests, please try again after 1 minute.',
+  });
+  
+  app.use(limiter);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error("Error:", err);
@@ -121,5 +131,7 @@ mongoose
     console.error("MongoDB connection error:", err);
     process.exit(1);
   });
+
+  
 
 export default app;
