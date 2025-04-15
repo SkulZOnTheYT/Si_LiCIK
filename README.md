@@ -4,8 +4,40 @@ _**UMKM (Usaha Mikro, Kecil, dan Menengah)** memiliki peran penting dalam pereko
 
 Melihat permasalahan tersebut, tim kami mengembangkan _**SI LICIK (Sistem Literasi Cerdas, Inovatif dan Keuangan)**, sebuah platform edukasi yang membantu **UMKM** memahami dan menerapkan teknologi digital dalam bisnis mereka._ Sistem ini akan menyediakan materi pembelajaran tentang pencatatan keuangan digital, transaksi online, serta cara mengelola keuangan dengan lebih efektif. Selain itu, platform ini juga dilengkapi dengan fitur pengelolaan keuangan praktis yang dapat langsung digunakan oleh pelaku **UMKM** untuk membuat laporan keuangan, dan merencanakan anggaran.
 
-## Penelitian ini berusaha menjawab dua pertanyaan utama: 
-- (1) Sejauh mana pemahaman **UMKM** terhadap literasi digital?
-- (2) Bagaimana sistem edukasi berbasis teknologi dapat membantu **UMKM** dalam mengelola keuangan mereka? 
+## How To Reproduce | Bagaimana cara menjalankan?
 
-Dengan adanya **SI LICIK**, diharapkan para pelaku **UMKM** dapat lebih siap menghadapi era digital dan meningkatkan daya saing bisnis mereka.dapat meningkatkan kompetensi digital dan keuangan mereka, sehingga lebih siap menghadapi era digital dan meningkatkan daya saing bisnis. Platform ini diharapkan menjadi solusi inovatif yang mendorong pertumbuhan **UMKM** secara berkelanjutan, sekaligus berkontribusi pada penguatan perekonomian Indonesia. 
+- Jalankan secara Localhost (web & backend berjalan pada komputer user)
+```
+git clone https://github.com/SkulZOnTheYT/Si_LiCIK.git
+cd client
+npm run dev
+cd ~
+cd server
+npm run dev
+```
+
+- Jalankan secara Local + API (menggunakan localhost pada front-end dan api backend online)
+```
+git clone https://github.com/SkulZOnTheYT/Si_LiCIK.git
+cd client
+npm run dev
+```
+
+> ubah kode pada client/src/utils/url.js untuk menggunakan url backend online Si LiCIK atau ubah .env pada folder client
+
+```diff
+const url = {
+    apiUrl: import.meta.env.PROD 
++     ? 'https://silicik-api.up.railway.app'
+-     : 'http://localhost:5000',
+    clientUrl: import.meta.env.PROD
+-     ? 'https://silicik.vercel.app'
++     : 'http://localhost:5173'
+  };
+  
+  export default url;
+```
+
+- jalankan secara langsung dari web Si LiCIK
+
+> Kunjungi website Si LiCIK [client](https://silicik.vercel.app/) & [backend](https://silicik-api.up.railway.app/)
